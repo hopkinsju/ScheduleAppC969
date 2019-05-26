@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MakeAppointment.Properties {
+namespace ScheduleApp.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -31,17 +31,6 @@ namespace MakeAppointment.Properties {
         public string U04C2AConnectionString {
             get {
                 return ((string)(this["U04C2AConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=52.206.157.109;user id=U04C2A;persistsecurityinfo=True;database=U04C2A;all" +
-            "owuservariables=True")]
-        public string U04C2AConnectionString1 {
-            get {
-                return ((string)(this["U04C2AConnectionString1"]));
             }
         }
     }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 
-namespace MakeContact
+namespace ScheduleApp
 {
     public partial class MakeContact : Form
     {

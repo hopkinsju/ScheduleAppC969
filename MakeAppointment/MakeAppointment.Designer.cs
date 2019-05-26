@@ -1,4 +1,4 @@
-﻿namespace MakeAppointment
+﻿namespace ScheduleApp
 {
     partial class MakeAppointment
     {
@@ -39,6 +39,7 @@
             this.labelEnd = new System.Windows.Forms.Label();
             this.labelType = new System.Windows.Forms.Label();
             this.textBoxTitle = new System.Windows.Forms.TextBox();
+            this.appointmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBoxDesc = new System.Windows.Forms.TextBox();
             this.textBoxURL = new System.Windows.Forms.TextBox();
             this.textBoxContact = new System.Windows.Forms.TextBox();
@@ -50,10 +51,11 @@
             this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.appointmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.textBoxLocation = new System.Windows.Forms.TextBox();
+            this.labelLocation = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.appointmentBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -100,7 +102,7 @@
             // 
             this.labelContact.AutoSize = true;
             this.labelContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelContact.Location = new System.Drawing.Point(16, 318);
+            this.labelContact.Location = new System.Drawing.Point(16, 359);
             this.labelContact.Name = "labelContact";
             this.labelContact.Size = new System.Drawing.Size(69, 20);
             this.labelContact.TabIndex = 4;
@@ -110,7 +112,7 @@
             // 
             this.labelURL.AutoSize = true;
             this.labelURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelURL.Location = new System.Drawing.Point(16, 277);
+            this.labelURL.Location = new System.Drawing.Point(16, 318);
             this.labelURL.Name = "labelURL";
             this.labelURL.Size = new System.Drawing.Size(46, 20);
             this.labelURL.TabIndex = 5;
@@ -140,7 +142,7 @@
             // 
             this.labelType.AutoSize = true;
             this.labelType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelType.Location = new System.Drawing.Point(16, 236);
+            this.labelType.Location = new System.Drawing.Point(16, 277);
             this.labelType.Name = "labelType";
             this.labelType.Size = new System.Drawing.Size(47, 20);
             this.labelType.TabIndex = 8;
@@ -155,6 +157,10 @@
             this.textBoxTitle.Size = new System.Drawing.Size(292, 26);
             this.textBoxTitle.TabIndex = 9;
             // 
+            // appointmentBindingSource
+            // 
+            this.appointmentBindingSource.DataSource = typeof(DataLayer.appointment);
+            // 
             // textBoxDesc
             // 
             this.textBoxDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -167,7 +173,7 @@
             // textBoxURL
             // 
             this.textBoxURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxURL.Location = new System.Drawing.Point(104, 274);
+            this.textBoxURL.Location = new System.Drawing.Point(104, 316);
             this.textBoxURL.Name = "textBoxURL";
             this.textBoxURL.Size = new System.Drawing.Size(252, 26);
             this.textBoxURL.TabIndex = 11;
@@ -175,7 +181,7 @@
             // textBoxContact
             // 
             this.textBoxContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxContact.Location = new System.Drawing.Point(104, 315);
+            this.textBoxContact.Location = new System.Drawing.Point(104, 355);
             this.textBoxContact.Name = "textBoxContact";
             this.textBoxContact.Size = new System.Drawing.Size(252, 26);
             this.textBoxContact.TabIndex = 12;
@@ -188,7 +194,7 @@
             "Phone Call",
             "Webex",
             "In-Person Meeting"});
-            this.comboBoxType.Location = new System.Drawing.Point(104, 236);
+            this.comboBoxType.Location = new System.Drawing.Point(104, 275);
             this.comboBoxType.Name = "comboBoxType";
             this.comboBoxType.Size = new System.Drawing.Size(252, 28);
             this.comboBoxType.TabIndex = 13;
@@ -257,15 +263,31 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // appointmentBindingSource
+            // textBoxLocation
             // 
-            this.appointmentBindingSource.DataSource = typeof(DataLayer.appointment);
+            this.textBoxLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxLocation.Location = new System.Drawing.Point(104, 236);
+            this.textBoxLocation.Name = "textBoxLocation";
+            this.textBoxLocation.Size = new System.Drawing.Size(252, 26);
+            this.textBoxLocation.TabIndex = 20;
+            // 
+            // labelLocation
+            // 
+            this.labelLocation.AutoSize = true;
+            this.labelLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLocation.Location = new System.Drawing.Point(16, 236);
+            this.labelLocation.Name = "labelLocation";
+            this.labelLocation.Size = new System.Drawing.Size(74, 20);
+            this.labelLocation.TabIndex = 19;
+            this.labelLocation.Text = "Location:";
             // 
             // MakeAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBoxLocation);
+            this.Controls.Add(this.labelLocation);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.dateTimePickerEnd);
@@ -288,9 +310,9 @@
             this.Name = "MakeAppointment";
             this.Text = "Make An Appointment";
             this.Load += new System.EventHandler(this.MakeAppointment_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.appointmentBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -320,6 +342,8 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.BindingSource appointmentBindingSource;
+        private System.Windows.Forms.TextBox textBoxLocation;
+        private System.Windows.Forms.Label labelLocation;
     }
 }
 

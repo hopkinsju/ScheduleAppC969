@@ -117,7 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="appointmentBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="AppTitleText" xml:space="preserve">
+    <value>Aplicación de programación</value>
+  </data>
+  <data name="LoginButtonText" xml:space="preserve">
+    <value>Iniciar sesión</value>
+  </data>
+  <data name="LoginExceptionText" xml:space="preserve">
+    <value>No se puede autenticar, por favor intente de nuevo.</value>
+  </data>
+  <data name="PasswordText" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="UsernameText" xml:space="preserve">
+    <value>Nombre de usuario</value>
+  </data>
 </root>

@@ -1,4 +1,4 @@
-﻿namespace MakeContact
+﻿namespace ScheduleApp
 {
     partial class MakeContact
     {

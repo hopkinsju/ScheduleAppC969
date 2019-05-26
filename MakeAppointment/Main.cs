@@ -10,21 +10,58 @@ using System.Windows.Forms;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 
-namespace MakeAppointment
+namespace ScheduleApp
 {
-    public partial class MainScreen : Form
+    public partial class Main : Form
     {
         private int childFormNumber = 0;
-        private Form DisplayAppointments = new DisplayAppointments.DisplayAppointments();
-        private Form DisplayContacts = new DisplayContacts.DisplayContacts();
+        //private Form DisplayAppointments = new DisplayAppointments.DisplayAppointments(this);
+        //private Form DisplayContacts = new DisplayContacts.DisplayContacts();
         private DataLayer.ScheduleEntities dbcontext =
             new DataLayer.ScheduleEntities();
+        private int currentUser;
 
-        public MainScreen()
+        public int CurrentUser
         {
-            InitializeComponent();
+            get { return currentUser; }
+            set {
+                if (currentUser == 0)
+                {
+                    this.currentUser = value;
+                }
+                else {
+                    throw new InvalidOperationException("Value can be set only once");
+                }
+            }
+
         }
 
+        public Main()
+        {
+            InitializeComponent();
+            using (Login login = new Login(this))
+            {
+                if (login.ShowDialog() != DialogResult.OK)
+                {
+                    Application.Exit();
+                    return;
+                }
+
+            }
+        }
+
+        public int GetUserIDByUsername(string username)
+        {
+            var UserID = 
+                (
+                    from user in dbcontext.users
+                    where user.userName == username
+                    select user.userId
+                )
+                .FirstOrDefault();
+
+            return UserID; 
+        }
         private void ShowNewForm(object sender, EventArgs e)
         {
             Form childForm = new Form();
@@ -134,8 +171,9 @@ namespace MakeAppointment
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
+
             dbcontext.appointments
-                //.OrderBy(appt => appt.start)
+                .OrderBy(appt => appt.start)
                 .Load();
 
             appointmentBindingSource.DataSource = dbcontext.appointments.Local;
@@ -144,12 +182,23 @@ namespace MakeAppointment
                 .OrderBy(cust => cust.customerName)
                 .Load();
             customerBindingSource.DataSource = dbcontext.customers.Local;
+
         }
 
         private void buttonAddAppt_Click(object sender, EventArgs e)
         {
-            Form newApptForm = new MakeAppointment();
+            MakeAppointment newApptForm = new MakeAppointment(this);
             newApptForm.Show();
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -10,13 +10,15 @@ using System.Windows.Forms;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 
-namespace MakeAppointment
+namespace ScheduleApp
 {
     public partial class MakeAppointment : Form
     {
-        public MakeAppointment()
+        private Main mainForm;
+        public MakeAppointment(Main mainForm)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
         }
 
         DataLayer.ScheduleEntities dbcontext =
@@ -24,6 +26,8 @@ namespace MakeAppointment
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            string CurrentUserName = dbcontext.users.Find(mainForm.CurrentUser).userName;
+
             DataLayer.appointment appt = new DataLayer.appointment();
             appt.title = textBoxTitle.Text;
             appt.description = textBoxDesc.Text;
@@ -33,11 +37,12 @@ namespace MakeAppointment
             appt.contact = textBoxContact.Text;
             appt.start = dateTimePickerStart.Value;
             appt.end = dateTimePickerEnd.Value;
-            appt.location = "online";
-            appt.url = "google.com";
-            appt.createdBy = "1";
-            appt.lastUpdateBy = "1";
-            
+            appt.location = textBoxLocation.Text;
+            appt.url = textBoxURL.Text;
+            appt.createdBy = CurrentUserName;
+            appt.lastUpdateBy = CurrentUserName;
+
+
             Validate(); // validate the input fields                       
             appointmentBindingSource.EndEdit();
 
@@ -46,7 +51,8 @@ namespace MakeAppointment
 
 
                 dbcontext.appointments.Add(appt);
-                dbcontext.SaveChanges(); // write changes to database file
+                dbcontext.SaveChanges(); // write changes to database file 
+
             }
             catch (DbEntityValidationException)
             {
