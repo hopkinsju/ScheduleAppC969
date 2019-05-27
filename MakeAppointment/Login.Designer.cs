@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.labelAppTitle = new System.Windows.Forms.Label();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
@@ -40,101 +41,62 @@
             // 
             // labelAppTitle
             // 
-            this.labelAppTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelAppTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.labelAppTitle.Location = new System.Drawing.Point(138, 71);
+            resources.ApplyResources(this.labelAppTitle, "labelAppTitle");
             this.labelAppTitle.Name = "labelAppTitle";
-            this.labelAppTitle.Size = new System.Drawing.Size(500, 50);
-            this.labelAppTitle.TabIndex = 0;
-            this.labelAppTitle.Text = "Scheduling App";
-            this.labelAppTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxUsername
             // 
-            this.textBoxUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxUsername.Location = new System.Drawing.Point(48, 44);
-            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
+            resources.ApplyResources(this.textBoxUsername, "textBoxUsername");
             this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(142, 20);
-            this.textBoxUsername.TabIndex = 1;
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxPassword.Location = new System.Drawing.Point(48, 94);
+            resources.ApplyResources(this.textBoxPassword, "textBoxPassword");
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(142, 20);
-            this.textBoxPassword.TabIndex = 2;
             // 
             // labelUsername
             // 
-            this.labelUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelUsername.AutoSize = true;
-            this.labelUsername.Location = new System.Drawing.Point(45, 28);
-            this.labelUsername.Margin = new System.Windows.Forms.Padding(3, 0, 50, 0);
+            resources.ApplyResources(this.labelUsername, "labelUsername");
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(55, 13);
-            this.labelUsername.TabIndex = 3;
-            this.labelUsername.Text = "Username";
             // 
             // labelPassword
             // 
-            this.labelPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(45, 78);
+            resources.ApplyResources(this.labelPassword, "labelPassword");
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(53, 13);
-            this.labelPassword.TabIndex = 4;
-            this.labelPassword.Text = "Password";
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.textBoxUsername);
             this.groupBox1.Controls.Add(this.textBoxPassword);
             this.groupBox1.Controls.Add(this.labelUsername);
             this.groupBox1.Controls.Add(this.labelPassword);
-            this.groupBox1.Location = new System.Drawing.Point(271, 124);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(239, 143);
-            this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(351, 282);
+            resources.ApplyResources(this.buttonLogin, "buttonLogin");
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogin.TabIndex = 6;
-            this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.ButtonLogin_Click);
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AcceptButton = this.buttonLogin;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.labelAppTitle);
             this.Name = "Login";
-            this.Text = "Login";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Login_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_FormClosed);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Login_KeyPress);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

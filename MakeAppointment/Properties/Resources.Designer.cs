@@ -88,6 +88,15 @@ namespace ScheduleApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login Failure.
+        /// </summary>
+        internal static string LoginFail {
+            get {
+                return ResourceManager.GetString("LoginFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         internal static string PasswordText {

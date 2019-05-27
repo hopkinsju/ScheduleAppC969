@@ -126,6 +126,9 @@
   <data name="LoginExceptionText" xml:space="preserve">
     <value>Unable to authenticate, please try again.</value>
   </data>
+  <data name="LoginFail" xml:space="preserve">
+    <value>Login Failure</value>
+  </data>
   <data name="PasswordText" xml:space="preserve">
     <value>Password</value>
   </data>

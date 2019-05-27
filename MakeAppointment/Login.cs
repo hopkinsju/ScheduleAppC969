@@ -13,8 +13,10 @@ namespace ScheduleApp
 {
     public partial class Login : Form
     {
-        private Main mainForm;
-        public Login(Main mainForm)
+
+        private bool isValidUser = false;
+        public int userId = 0;
+        public Login()
         {
             InitializeComponent();
             string region = RegionInfo.CurrentRegion.TwoLetterISORegionName;
@@ -23,13 +25,12 @@ namespace ScheduleApp
                 Properties.Resources.Culture = new CultureInfo("es-MX");
             }
 
-
             labelAppTitle.Text = Properties.Resources.AppTitleText;
             labelUsername.Text = Properties.Resources.UsernameText;
             labelPassword.Text = Properties.Resources.PasswordText;
             buttonLogin.Text = Properties.Resources.LoginButtonText;
-
-            this.mainForm = mainForm;
+            this.ActiveControl = textBoxUsername;
+            
 
 
         }
@@ -41,18 +42,18 @@ namespace ScheduleApp
         {
             string username = textBoxUsername.Text;
             string password = textBoxPassword.Text;
- 
+
             // If username checks out, show the main screen
-            if (CheckLogin(username, password))
+            userId = CheckLogin(username, password);
+            if (userId > 0)
             {
+                isValidUser = true;
                 this.DialogResult = DialogResult.OK;
-                mainForm.CurrentUser = mainForm.GetUserIDByUsername(username);
-                this.Close();
             }
             // otherwise throw a message and clear the form.
             else
             {
-            MessageBox.Show(Properties.Resources.LoginExceptionText);
+                MessageBox.Show(Properties.Resources.LoginExceptionText,Properties.Resources.LoginFail, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Action<Control.ControlCollection> clear = null;
 
@@ -71,20 +72,42 @@ namespace ScheduleApp
 
         }
 
-        private bool CheckLogin(string username, string password)
+        private int CheckLogin(string username, string password)
         {
             try
             {
-                // .Any returns true if any database rows match the where clause
-                return dbcontext.users
-                    .Where(u => u.userName == username && u.password == password)
-                    .Any();
+                // Get the user and return the ID
+                DataLayer.user user = dbcontext.users
+                    .Where(u => u.userName == username)
+                    .FirstOrDefault();
+                if (user.password == password)
+                {
+                    return user.userId;
+                }
+                return 0;
             }
-            catch (InvalidOperationException e)
+            catch (NullReferenceException)
             {
-                MessageBox.Show(Properties.Resources.LoginExceptionText, e.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                return 0;
             }
+        }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(!isValidUser)
+            {
+                this.DialogResult = DialogResult.Cancel;
+            }
+        }
+
+        private void Login_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }

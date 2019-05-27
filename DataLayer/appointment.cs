@@ -29,23 +29,8 @@ namespace DataLayer
         public string lastUpdateBy { get; set; }
         public string type { get; set; }
         public Nullable<int> userId { get; set; }
-        public string customerName
-        {
-            get { return getCustomerName(customerId); }
-        }
-
-        private string getCustomerName(int customerId)
-        {
-            return customer.customerName;
-        }
-
-
+    
         public virtual customer customer { get; set; }
         public virtual user user { get; set; }
-
-        public override string ToString()
-        {
-            return $"{start} - {title} ({contact})";
-        }
     }
 }

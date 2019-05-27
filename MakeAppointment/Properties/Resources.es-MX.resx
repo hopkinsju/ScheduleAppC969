@@ -126,6 +126,9 @@
   <data name="LoginExceptionText" xml:space="preserve">
     <value>No se puede autenticar, por favor intente de nuevo.</value>
   </data>
+  <data name="LoginFail" xml:space="preserve">
+    <value>Error de inicio de sesion</value>
+  </data>
   <data name="PasswordText" xml:space="preserve">
     <value>Contraseña</value>
   </data>
