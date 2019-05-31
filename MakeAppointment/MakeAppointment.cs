@@ -32,7 +32,8 @@ namespace ScheduleApp
         {
             try
             {
-                this.appt = dbcontext.appointments
+                // Lambda with LINQ query for concise and efficient queries
+                appt = dbcontext.appointments
                 .Where(a => a.appointmentId == apptId)
                 .FirstOrDefault();
             }
@@ -56,15 +57,83 @@ namespace ScheduleApp
 
         }
 
+        [Serializable]
+        class WorkingTooHardException : Exception
+        {
+            public WorkingTooHardException()
+            {
+
+            }
+
+            public WorkingTooHardException(string msg)
+                : base(String.Format("{0}", msg))
+            {
+
+            }
+
+        }
+        [Serializable]
+        class TimeTravelImpossibleException : Exception
+        {
+            public TimeTravelImpossibleException()
+            {
+
+            }
+
+            public TimeTravelImpossibleException(string msg)
+                : base(String.Format("{0}", msg))
+            {
+
+            }
+
+        }
+
+        private void ValidateAppt(DataLayer.appointment appt)
+        {
+            using (var ctx = new DataLayer.ScheduleEntities())
+            {
+                string CurrentUserName = dbcontext.users.Find(mainForm.CurrentUser).userName;
+                // Lambda with LINQ query for concise and efficient queries
+                bool overlapping = ctx.appointments
+                    .Where(a =>
+                    a.createdBy == CurrentUserName && (a.start > appt.start && a.start < appt.end)
+                    || (a.end < appt.end && a.start > appt.start)
+                    )
+                    .Any();
+                if (overlapping)
+                {
+                    throw new WorkingTooHardException("Appointment overlaps with existing appointment");
+                }
+                if (
+                    appt.start.ToLocalTime().Hour < 9 ||
+                    appt.start.ToLocalTime().Hour > 17 ||
+                    appt.start.ToLocalTime().Day != appt.end.ToLocalTime().Day
+                    )
+                {
+                    throw new WorkingTooHardException("Appointments must be within business hours");
+                }
+                if (appt.start.ToLocalTime() > appt.end.ToLocalTime())
+                {
+                    throw new TimeTravelImpossibleException("Appointment end cannot be before appointment start");
+                }
+            }
+        }
+
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            if (!ValidateChildren())
+            {
+                DialogResult = DialogResult.None;
+                return;
+            }
             string CurrentUserName = dbcontext.users.Find(mainForm.CurrentUser).userName;
 
+
             //DataLayer.appointment appt = new DataLayer.appointment();
-            //appt.appointmentId = apptId;
+            
             appt.title = textBoxTitle.Text;
             appt.description = textBoxDesc.Text;
-            appt.customerId = 1;
+            appt.customerId = int.Parse(comboBoxCustomer.SelectedValue.ToString());
             appt.contact = textBoxContact.Text;
             appt.type = comboBoxType.Text;
             appt.contact = textBoxContact.Text;
@@ -73,16 +142,31 @@ namespace ScheduleApp
             appt.location = textBoxLocation.Text;
             appt.url = textBoxURL.Text;
             appt.createdBy = CurrentUserName;
+            appt.createDate = DateTime.Now.ToUniversalTime();
             appt.lastUpdateBy = CurrentUserName;
             appt.userId = mainForm.CurrentUser;
             appt.lastUpdate = DateTime.Now.ToUniversalTime();
 
 
-            Validate(); // validate the input fields                       
+            try
+            {
+                ValidateAppt(appt); // validate the input fields   
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Your appointment was not saved: {ex.Message}");
+                return;
+            }
+                               
             appointmentBindingSource.EndEdit();
 
             // try to save changes
             try {
+                if (apptId == 0)
+                {
+                    dbcontext.appointments.Add(appt);
+                }
+                
                 dbcontext.SaveChanges(); // write changes to database file 
                 this.Close();
                 DialogResult = DialogResult.OK;

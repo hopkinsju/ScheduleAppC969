@@ -155,7 +155,7 @@
             this.textBoxTitle.Location = new System.Drawing.Point(64, 60);
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.Size = new System.Drawing.Size(292, 26);
-            this.textBoxTitle.TabIndex = 9;
+            this.textBoxTitle.TabIndex = 1;
             // 
             // appointmentBindingSource
             // 
@@ -168,7 +168,7 @@
             this.textBoxDesc.Multiline = true;
             this.textBoxDesc.Name = "textBoxDesc";
             this.textBoxDesc.Size = new System.Drawing.Size(336, 54);
-            this.textBoxDesc.TabIndex = 10;
+            this.textBoxDesc.TabIndex = 2;
             // 
             // textBoxURL
             // 
@@ -176,7 +176,7 @@
             this.textBoxURL.Location = new System.Drawing.Point(104, 316);
             this.textBoxURL.Name = "textBoxURL";
             this.textBoxURL.Size = new System.Drawing.Size(252, 26);
-            this.textBoxURL.TabIndex = 11;
+            this.textBoxURL.TabIndex = 6;
             // 
             // textBoxContact
             // 
@@ -184,20 +184,23 @@
             this.textBoxContact.Location = new System.Drawing.Point(104, 355);
             this.textBoxContact.Name = "textBoxContact";
             this.textBoxContact.Size = new System.Drawing.Size(252, 26);
-            this.textBoxContact.TabIndex = 12;
+            this.textBoxContact.TabIndex = 7;
             // 
             // comboBoxType
             // 
+            this.comboBoxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.comboBoxType.FormattingEnabled = true;
             this.comboBoxType.Items.AddRange(new object[] {
-            "Phone Call",
-            "Webex",
-            "In-Person Meeting"});
+            "In-Person Meeting",
+            "Phone",
+            "Webex"});
             this.comboBoxType.Location = new System.Drawing.Point(104, 275);
             this.comboBoxType.Name = "comboBoxType";
             this.comboBoxType.Size = new System.Drawing.Size(252, 28);
-            this.comboBoxType.TabIndex = 13;
+            this.comboBoxType.Sorted = true;
+            this.comboBoxType.TabIndex = 5;
+            this.comboBoxType.Tag = "";
             // 
             // userBindingSource
             // 
@@ -211,12 +214,13 @@
             // 
             this.comboBoxCustomer.DataSource = this.customerBindingSource;
             this.comboBoxCustomer.DisplayMember = "customerName";
+            this.comboBoxCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.comboBoxCustomer.FormattingEnabled = true;
             this.comboBoxCustomer.Location = new System.Drawing.Point(104, 195);
             this.comboBoxCustomer.Name = "comboBoxCustomer";
             this.comboBoxCustomer.Size = new System.Drawing.Size(252, 28);
-            this.comboBoxCustomer.TabIndex = 14;
+            this.comboBoxCustomer.TabIndex = 3;
             this.comboBoxCustomer.ValueMember = "customerId";
             // 
             // dateTimePickerStart
@@ -229,7 +233,7 @@
             this.dateTimePickerStart.Name = "dateTimePickerStart";
             this.dateTimePickerStart.ShowUpDown = true;
             this.dateTimePickerStart.Size = new System.Drawing.Size(175, 26);
-            this.dateTimePickerStart.TabIndex = 15;
+            this.dateTimePickerStart.TabIndex = 8;
             // 
             // dateTimePickerEnd
             // 
@@ -241,14 +245,14 @@
             this.dateTimePickerEnd.Name = "dateTimePickerEnd";
             this.dateTimePickerEnd.ShowUpDown = true;
             this.dateTimePickerEnd.Size = new System.Drawing.Size(175, 26);
-            this.dateTimePickerEnd.TabIndex = 16;
+            this.dateTimePickerEnd.TabIndex = 9;
             // 
             // buttonSave
             // 
             this.buttonSave.Location = new System.Drawing.Point(643, 392);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 17;
+            this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -258,7 +262,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(550, 392);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 18;
+            this.buttonCancel.TabIndex = 10;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -269,7 +273,7 @@
             this.textBoxLocation.Location = new System.Drawing.Point(104, 236);
             this.textBoxLocation.Name = "textBoxLocation";
             this.textBoxLocation.Size = new System.Drawing.Size(252, 26);
-            this.textBoxLocation.TabIndex = 20;
+            this.textBoxLocation.TabIndex = 4;
             // 
             // labelLocation
             // 

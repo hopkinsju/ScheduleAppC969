@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using System.IO;
 
 namespace ScheduleApp
 {
@@ -20,7 +21,10 @@ namespace ScheduleApp
         {
             InitializeComponent();
             string region = RegionInfo.CurrentRegion.TwoLetterISORegionName;
-            if (region != "US")
+            // Second location supported is MX - to make testing easier
+            // select MX if not US. Setting the Region and Regional Format will
+            // trigger this.
+            if (region == "MX")
             {
                 Properties.Resources.Culture = new CultureInfo("es-MX");
             }
@@ -74,22 +78,45 @@ namespace ScheduleApp
 
         private int CheckLogin(string username, string password)
         {
-            try
+            // record login activity
+            string logfilePath = @"auth_log.txt";
+            if (!File.Exists(logfilePath))
             {
-                // Get the user and return the ID
-                DataLayer.user user = dbcontext.users
-                    .Where(u => u.userName == username)
-                    .FirstOrDefault();
-                if (user.password == password)
+                // Create a file to write to.
+                using (StreamWriter logfile = File.CreateText(logfilePath))
                 {
-                    return user.userId;
+                    logfile.WriteLine("Log of user authentication activitity:");
                 }
-                return 0;
             }
-            catch (NullReferenceException)
+            using (StreamWriter logfile = File.AppendText(logfilePath))
             {
-                return 0;
+                try
+                {
+                    // Get the user and return the ID
+                    DataLayer.user user = dbcontext.users
+                        .Where(u => u.userName == username)
+                        .FirstOrDefault();
+                    if (user.password == password)
+                    {
+                        logfile.WriteLine($"{DateTime.Now.ToUniversalTime()}(UTC) user: {username}, result: success");
+                        return user.userId;
+                    }
+                    logfile.WriteLine($"{DateTime.Now.ToUniversalTime()}(UTC) user: {username}, result: failure");
+                    return 0;
+                }
+                catch (NullReferenceException)
+                {
+                    logfile.WriteLine($"{DateTime.Now.ToUniversalTime()}(UTC) user: {username}, result: error");
+                    return 0;
+                }
+                catch
+                {
+                    logfile.WriteLine($"{DateTime.Now.ToUniversalTime()}(UTC) user: {username} result: error");
+                    MessageBox.Show("Unable to verify login, possibly due to network failure.");
+                    return 0;
+                }
             }
+            
         }
 
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
